@@ -1,0 +1,97 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: student-expenses
+  labels:
+    app.kubernetes.io/name: backend
+    app.kubernetes.io/part-of: student-expenses-management
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: backend
+  ports:
+    - name: http
+      port: 5000
+      targetPort: 5000
+      protocol: TCP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: student-expenses
+  labels:
+    app.kubernetes.io/name: backend
+    app.kubernetes.io/part-of: student-expenses-management
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: backend
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: backend
+        app.kubernetes.io/part-of: student-expenses-management
+    spec:
+      restartPolicy: Always
+      initContainers:
+        - name: wait-for-mongodb
+          image: mongo:7
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - -c
+            - |
+              until mongosh --host mongodb --port 27017 --quiet --eval "db.adminCommand('ping').ok" | grep -q 1; do
+                echo "Waiting for MongoDB to accept connections..."
+                sleep 2
+              done
+      containers:
+        - name: backend
+          image: student-expenses-backend:local
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: student-expenses-config
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: student-expenses-secrets
+                  key: JWT_SECRET
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          startupProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 12
+          readinessProbe:
+            exec:
+              command:
+                - node
+                - -e
+                - "fetch('http://127.0.0.1:5000/api/health').then(response => response.json()).then(health => { if (health.database?.status !== 'connected') process.exit(1); }).catch(() => process.exit(1))"
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
