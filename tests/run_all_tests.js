@@ -12,6 +12,7 @@ await import('./04_analytics_dashboard.test.js');
 await import('./05_monthly_budget.test.js');
 await import('./06_csv_export.test.js');
 await import('./07_persistence_restart.test.js');
+await import('./08_system_health_integration.test.js');
 
 test('Final Cleanup & Teardown: purge test accounts and close server', async () => {
   console.log('[Test Teardown] Purging test accounts and disconnecting MongoDB pool...');

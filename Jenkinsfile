@@ -34,6 +34,19 @@ pipeline {
             }
         }
 
+        stage('Validate Kubernetes Manifests') {
+            steps {
+                script {
+                    def hasKubectl = bat(script: 'where kubectl', returnStatus: true) == 0
+                    if (hasKubectl) {
+                        bat 'kubectl apply --dry-run=client -f k8s/'
+                    } else {
+                        echo 'kubectl not detected on build agent; skipping Kubernetes manifest dry-run.'
+                    }
+                }
+            }
+        }
+
         stage('Test Application') {
             steps {
                 withCredentials([
