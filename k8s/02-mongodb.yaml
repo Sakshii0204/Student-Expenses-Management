@@ -75,8 +75,8 @@ spec:
                 - --quiet
                 - --eval
                 - db.adminCommand('ping').ok
-            periodSeconds: 5
-            timeoutSeconds: 3
+            periodSeconds: 10
+            timeoutSeconds: 8
             failureThreshold: 24
           readinessProbe:
             exec:
@@ -85,8 +85,8 @@ spec:
                 - --quiet
                 - --eval
                 - db.adminCommand('ping').ok
-            periodSeconds: 5
-            timeoutSeconds: 3
+            periodSeconds: 10
+            timeoutSeconds: 8
             failureThreshold: 3
           livenessProbe:
             exec:
@@ -95,8 +95,8 @@ spec:
                 - --quiet
                 - --eval
                 - db.adminCommand('ping').ok
-            periodSeconds: 10
-            timeoutSeconds: 5
+            periodSeconds: 15
+            timeoutSeconds: 8
             failureThreshold: 3
           volumeMounts:
             - name: mongodb-data

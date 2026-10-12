@@ -1,4 +1,4 @@
-﻿# Kubernetes deployment (Windows and Minikube)
+# Kubernetes deployment (Windows and Minikube)
 
 These manifests run the production React build, Express API, and MongoDB in the
 `student-expenses` namespace. Services are cluster-internal (`ClusterIP`); the
@@ -163,6 +163,24 @@ kubectl logs deployment/frontend -n student-expenses
 kubectl logs deployment/backend -n student-expenses --previous
 kubectl get events -n student-expenses --sort-by=.lastTimestamp
 ```
+
+### Automated Monitoring and Verification Scripts
+
+Two automated PowerShell tools are provided for one-command health monitoring and verification:
+
+1. **Real-Time Monitoring Console**:
+   ```powershell
+   .\k8s\monitor-health.ps1
+   ```
+   Inspects node health, CPU/RAM utilization via Metrics Server, pod readiness, restart counts, service endpoints, PVC binding, and application `/api/health`.
+
+2. **Automated Verification Runner**:
+   ```powershell
+   .\k8s\verify-deployment.ps1
+   ```
+   Runs a deterministic 7-point validation suite testing cluster readiness, storage binding, database ping, backend API health, frontend assets, reverse proxying, and metrics availability.
+
+For comprehensive architectural details and runbooks, refer to [INTEGRATION_AND_MONITORING.md](../docs/INTEGRATION_AND_MONITORING.md).
 
 `--previous` is useful after a container restart. For `ImagePullBackOff`, check
 the image name and that the image was built into the current Minikube profile.
