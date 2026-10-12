@@ -1,0 +1,44 @@
+{
+  "name": "student-expense-management-root",
+  "version": "2.0.0",
+  "description": "Student Expense Management System - Master Workspace (Phase 2 Unified Integration)",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "install:all": "npm.cmd install; npm.cmd --prefix integration/client install",
+    "install:integrated": "npm.cmd install; npm.cmd --prefix integration/client install",
+    "dev": "concurrently -n \"SERVER,CLIENT\" -c \"blue,green\" \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "npm --prefix integration/server run dev",
+    "dev:client": "npm --prefix integration/client run dev",
+    "build:client": "npm --prefix integration/client run build",
+    "test": "node --test tests/run_all_tests.js",
+    "start:server": "npm --prefix integration/server start",
+    "standalone:dev1:server": "npm --prefix developer1/server run dev",
+    "standalone:dev1:client": "npm --prefix developer1/client run dev",
+    "standalone:dev2:server": "npm --prefix developer2/server run dev",
+    "standalone:dev2:client": "npm --prefix developer2/client run dev",
+    "standalone:dev3:server": "npm --prefix developer3/server run dev",
+    "standalone:dev3:client": "npm --prefix developer3/client run dev"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.5"
+  },
+  "keywords": [
+    "mern",
+    "student-expense",
+    "integrated-application",
+    "react",
+    "express",
+    "mongodb"
+  ],
+  "author": "Student Development Team (Lead: Sakshi)",
+  "license": "ISC"
+}
