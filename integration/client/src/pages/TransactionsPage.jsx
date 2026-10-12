@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Receipt, Plus, RefreshCw, FileDown, AlertCircle } from 'lucide-react';
 import { expenseApi } from '../services/api';
-import { ExpenseTable } from '../../../../developer2/client/src/components/ExpenseTable';
-import { ExpenseFormModal } from '../../../../developer2/client/src/components/ExpenseFormModal';
-import { DeleteConfirmModal } from '../../../../developer2/client/src/components/DeleteConfirmModal';
-import { ExpenseFilters } from '../../../../developer2/client/src/components/ExpenseFilters';
-import { ExpenseSummaryCards } from '../../../../developer2/client/src/components/ExpenseSummaryCards';
+import { ExpenseTable } from '../components/ExpenseTable';
+import { ExpenseFormModal } from '../components/ExpenseFormModal';
+import { DeleteConfirmModal } from '../components/DeleteConfirmModal';
+import { ExpenseFilters } from '../components/ExpenseFilters';
+import { ExpenseSummaryCards } from '../components/ExpenseSummaryCards';
 import { Pagination } from '../components/common/Pagination';
 
 export function TransactionsPage() {

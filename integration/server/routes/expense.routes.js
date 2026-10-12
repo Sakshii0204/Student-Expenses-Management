@@ -1,3 +1,4 @@
+
 import { Router } from 'express';
 import {
   createExpense,
@@ -6,7 +7,7 @@ import {
   updateExpense,
   deleteExpense,
   exportExpensesCSV,
-} from '../../../developer2/server/controllers/expense.controller.js';
+} from '../controllers/expense.controller.js';
 import { protect } from '../middleware/auth.middleware.js';
 
 const router = Router();

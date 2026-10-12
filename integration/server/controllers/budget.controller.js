@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
 import { Budget } from '../models/Budget.js';
-import { Expense } from '../../../developer2/server/models/Expense.js';
-import { calculateBudgetUtilization } from '../../../shared/contracts/budget.contract.js';
-
+import { Expense } from '../models/Expense.js';
+import { calculateBudgetUtilization } from '../contracts/budget.contract.js';
 function isDBReady() {
   return mongoose.connection.readyState === 1;
 }

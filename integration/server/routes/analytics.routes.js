@@ -1,10 +1,11 @@
+
 import { Router } from 'express';
 import {
   getSummary,
   getByCategory,
   getMonthlyTrend,
   getRecentTransactions,
-} from '../../../developer3/server/controllers/analytics.controller.js';
+} from '../controllers/analytics.controller.js';
 import { protect } from '../middleware/auth.middleware.js';
 
 const router = Router();

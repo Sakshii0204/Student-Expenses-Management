@@ -2,11 +2,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { LayoutDashboard, RefreshCw, Plus, ArrowRight, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { analyticsApi, budgetApi } from '../services/api';
-import { KPICards } from '../../../../developer3/client/src/components/KPICards';
-import { CategoryPieChart } from '../../../../developer3/client/src/components/CategoryPieChart';
-import { MonthlyTrendChart } from '../../../../developer3/client/src/components/MonthlyTrendChart';
-import { RecentTransactionsTable } from '../../../../developer3/client/src/components/RecentTransactionsTable';
-import { TimeframeSelector } from '../../../../developer3/client/src/components/TimeframeSelector';
+import { KPICards } from '../components/KPICards';
+import { CategoryPieChart } from '../components/CategoryPieChart';
+import { MonthlyTrendChart } from '../components/MonthlyTrendChart';
+import { RecentTransactionsTable } from '../components/RecentTransactionsTable';
+import { TimeframeSelector } from '../components/TimeframeSelector';
 import { BudgetCard } from '../components/budget/BudgetCard';
 
 export function DashboardPage() {

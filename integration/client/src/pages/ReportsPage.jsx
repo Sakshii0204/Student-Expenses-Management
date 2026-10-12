@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { BarChart3, RefreshCw, Layers, Calendar, DollarSign } from 'lucide-react';
 import { analyticsApi } from '../services/api';
-import { CategoryPieChart } from '../../../../developer3/client/src/components/CategoryPieChart';
-import { MonthlyTrendChart } from '../../../../developer3/client/src/components/MonthlyTrendChart';
-import { TimeframeSelector } from '../../../../developer3/client/src/components/TimeframeSelector';
-
+import { CategoryPieChart } from '../components/CategoryPieChart';
+import { MonthlyTrendChart } from '../components/MonthlyTrendChart';
+import { TimeframeSelector } from '../components/TimeframeSelector';
 export function ReportsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
